@@ -13,7 +13,8 @@
 #include "element.h"
 
 struct List {
-       struct Element* head; //Zeiger auf Kopf der jeweiligen Liste
+	struct Element* head; //Zeiger auf Kopf der jeweiligen Liste
+};
 typedef struct List List;
 
 //Aufgabe 1
@@ -21,6 +22,7 @@ List* listCreate();
 void listPush(List* list, unsigned int value);
 Element* listPop(List* list);
 void listPrint(List* list);
+void listFillRandom(List* list, int seed, int anzahlWerte, int min, int max);
 
 //Aufgabe 2
 Element* listFindElement(List* list, unsigned int value);
