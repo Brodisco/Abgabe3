@@ -1,20 +1,19 @@
-/*
- * main.c
- *
- *  Created on: 22.11.2022
- *      Author: student
- */
-
-
+//Übungsblatt 3
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "element.h"
+#include "list.h"
+#include "test.h"
+
 int main(void)
 {
-	printf("Abgabe3 \n");
+	printf("Abgabe3 \n\n");
 
+	test_pushPrint();
+	testListFindElement();
+	testListGetIndexOfElement();
+	testListGetElementAtIndex();
 
-	int wait;
-	scanf("%d", &wait);
 	return EXIT_SUCCESS;
 }
