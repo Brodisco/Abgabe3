@@ -7,6 +7,7 @@
 
 #include "list.h"
 #include "element.h"
+#include "myboolean.h"
 
 // Aufgabe 1
 
@@ -96,15 +97,13 @@ Element* listFindElement(List* list, unsigned int value) {
 
 	Element* pResult = NULL;
 
-	if (list->head != NULL) {
-		Element* pCurrentElement = list->head;
-		while (pCurrentElement != NULL) {
-			if (pCurrentElement->value == value) {
-				pResult = pCurrentElement;
-				break;
-			}
-			pCurrentElement = pCurrentElement->pSuccessor;
+	Element* pCurrentElement = list->head;
+	while (pCurrentElement != NULL) {
+		if (pCurrentElement->value == value) {
+			pResult = pCurrentElement;
+			break;
 		}
+		pCurrentElement = pCurrentElement->pSuccessor;
 	}
 
 	return pResult;
@@ -168,4 +167,47 @@ Element* listGetElementAtIndex(List* list, unsigned int index) {
 
 	return pResult;
 }
+
+// Aufgabe 3
+
+boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex) {
+	/*
+	 * Die Funktion vertauscht die Werte der Elemente an Index aIndex und Index bIndex miteinander.
+	 * Schlägt die Vertauschung fehl, weil eines der beiden Elemente nicht existiert (Liste ist kürzer) wird FALSE zurückgegeben.
+	 * Ansonsten wird TRUE zurückgegeben. Zu Übungszwecken bietet es sich an die Vertauschung über eine zeigerbasierte Lösung durchzuführen.
+	 */
+
+	return FALSE;
+}
+
+boolean listDeleteElement(List* list, unsigned int value) {
+	/*
+	 * Die Funktion durchsucht die Liste beginnend vom Kopf zum Ende nach einem Element mit entsprechendem Value.
+	 * Ist das Element nicht in der Liste enthalten wird FALSE zurückgegeben. Ist das Element in der Liste enthalten,
+	 * so wird dieses gelöscht und sein Speicher freigegeben. Vorher ist allerdings der Nachfolgerzeiger des Vorgängerelements auf den Nachfolger
+	 * des Elements zu setzen (siehe GDI Skript).
+	 */
+
+	Element* pElement = listFindElement(list, value);
+	int index = listGetIndexOfElement(list, value);
+
+	if (pElement == NULL) {
+		// Element nicht gefunden
+		return FALSE;
+	} else {
+		// Element gefunden
+		if (index == 0) {
+			// Element ist an erster Stelle -> Kein Vorgänger
+			list->head = pElement->pSuccessor;
+		} else {
+			// Nicht an der ersten Stelle -> Vorgänger.Nachfolger auf Element.Nachfolger setzen
+			Element* pPredecessor = listGetElementAtIndex(list, index - 1);
+			pPredecessor->pSuccessor = pElement->pSuccessor;
+		}
+		// Speicher von Element freigeben
+		free(pElement);
+		return TRUE;
+	}
+}
+
 

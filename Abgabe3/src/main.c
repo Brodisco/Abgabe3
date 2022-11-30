@@ -43,6 +43,12 @@ int main(void)
 	printf("\nNormale Liste: \n");
 	listPrint(normaleListe);
 
+	unsigned int* deleted = listPop(normaleListe);
+	deleted = listPop(normaleListe);
+
+	printf("\nNormale Liste mit Pop: %i\n", *deleted);
+	listPrint(normaleListe);
+
 	printf("\nRandom Liste: \n");
 	listPrint(randomListe);
 
