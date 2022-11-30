@@ -170,15 +170,6 @@ Element* listGetElementAtIndex(List* list, unsigned int index) {
 
 // Aufgabe 3
 
-boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex) {
-	/*
-	 * Die Funktion vertauscht die Werte der Elemente an Index aIndex und Index bIndex miteinander.
-	 * Schlägt die Vertauschung fehl, weil eines der beiden Elemente nicht existiert (Liste ist kürzer) wird FALSE zurückgegeben.
-	 * Ansonsten wird TRUE zurückgegeben. Zu Übungszwecken bietet es sich an die Vertauschung über eine zeigerbasierte Lösung durchzuführen.
-	 */
-
-	return FALSE;
-}
 
 boolean listDeleteElement(List* list, unsigned int value) {
 	/*
