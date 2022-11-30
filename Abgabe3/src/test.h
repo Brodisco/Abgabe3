@@ -10,8 +10,9 @@
 
 #pragma once
 #include "Liste.h"
-void listFillRandom(List* list, int seed, int anzahlWerte, int min, int max); void testListFindElement(void);
+void test_pushPrint(void);
+void testListFindElement(void);
 void testListGetElementAtIndex(void);
-unsigned testListGetIndexOf(void);
+unsigned testListGetIndexOfElement(void);
 
 #endif /* TEST_H_ */

@@ -17,6 +17,7 @@
 int main(void)
 {
 	printf("Abgabe3 \n");
+	/*
 
 	List* leereListe = listCreate();
 
@@ -70,6 +71,13 @@ int main(void)
 	printf("%x\n", listGetElementAtIndex(leereListe, 6));
 
 	printf("Ende");
+	*/
+
+	printf("\nTest 1\n");
+	test_pushPrint();
+	printf("\nTest 2\n");
+	testListFindElement();
+	printf("\nTest 3\n");
 
 	int wait;
 	scanf("%d", &wait);

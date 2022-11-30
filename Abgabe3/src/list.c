@@ -206,8 +206,8 @@ boolean listDeleteElement(List* list, unsigned int value) {
 		}
 		// Speicher von Element freigeben
 		free(pElement);
-		return TRUE;
 	}
+	return TRUE;
 }
 
 
