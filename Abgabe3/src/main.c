@@ -78,6 +78,9 @@ int main(void)
 	printf("\nTest 2\n");
 	testListFindElement();
 	printf("\nTest 3\n");
+	testListGetIndexOfElement();
+	printf("\nTest 4\n");
+	testListGetElementAtIndex();
 
 	int wait;
 	scanf("%d", &wait);

@@ -13,6 +13,6 @@
 void test_pushPrint(void);
 void testListFindElement(void);
 void testListGetElementAtIndex(void);
-unsigned testListGetIndexOfElement(void);
+void testListGetIndexOfElement(void);
 
 #endif /* TEST_H_ */
