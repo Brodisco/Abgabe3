@@ -1,5 +1,6 @@
 #include "list.h"
 #include "element.h"
+#include "myboolean.h"
 
 //Aufgabe 1
 /* b)
@@ -37,13 +38,14 @@ void listPush(List* list, unsigned int value)
 
 Element* listPop(List* list)
 {
-	/*
-	 * Element* element = list->head;
-	 * list->head = list->head->pSuccessor;
-	 * return element;
-	*/
+	Element* element = list->head;
+	list->head = list->head->pSuccessor; //list->head zeigt auf aktuelle kopf der Liste
+	return element;
 
-	return list->head->pSuccessor;
+	//return list->head->pSuccessor; //geht nicht, weil wir zeigen nicht an der nächste Kopf,
+									//sondern auf nächstes Element, und damit überspringen wir
+									//ein Element, die wir nie mehr zugreifen können(es liegt
+									//und verbraucht Arbeitspeicher ohne Möglichkeit ihn zu löschen
 }
 
 /* e)
@@ -62,6 +64,7 @@ void listPrint(List* list)
 	if(element == 0)
 	{
 		printf("Liste leer!\n");
+		return;
 	}
 
 	while(element != NULL)
@@ -194,7 +197,42 @@ Element* listGetElementAtIndex(List* list, unsigned index)
 
 boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex)
 {
+	Element* elementA = listGetElementAtIndex(list, aIndex);
+	Element* elementB = listGetElementAtIndex(list, bIndex);
+	Element* elementTemp;
 
+	if (aIndex == bIndex) //prüft ob beide Index gleich sind
+	{
+		return FALSE;
+	}
+
+	if((elementA == NULL) || (elementB == NULL)) //prüft ob einer den Elementen nicht
+												//nicht in der List ist(Liste kürzer)
+	{
+		return FALSE;
+	}
+
+	elementTemp = elementA->pSuccessor;
+	elementA->pSuccessor = elementB->pSuccessor;//classic switcharoo von zeigern
+	elementB->pSuccessor = elementTemp;
+
+	if(aIndex == 0) //checks if Index at position 0 is/the head is
+	{
+		list->head = elementB;
+		listGetElementAtIndex(list, bIndex - 1)->pSuccessor = elementA;
+	}
+	else if(bIndex == 0) //checks if Index at position 0 is/the head is
+	{
+		list->head = elementA;
+		listGetElementAtIndex(list, aIndex - 1)->pSuccessor = elementB;
+	}
+	else
+	{
+		listGetElementAtIndex(list, aIndex - 1)->pSuccessor = elementB;
+		listGetElementAtIndex(list, bIndex - 1)->pSuccessor = elementA;
+	}
+
+	return TRUE;
 }
 
 /* b)
@@ -208,23 +246,29 @@ boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex)
 boolean listDeleteElement(List* list, unsigned int value)
 {
 	Element* element = list->head;
+	Element* prevElement = NULL; //weiß ich nicht
+//	int index = 0;
 
 	if(element == NULL)
 	{
 		return FALSE;
 	}
 
+//	index = listGetIndexOfElement(list, value);
+//	prevElement = listGetElementAtIndex(list, index-1);
+
 	while(element != NULL)
 	{
+//		if(index == 0)
 		if(element->value == value)
 		{
+			prevElement = element->pSuccessor;
 			free(element);
-			return TRUE;
 			break;
 		}
 		else{
 			element = element->pSuccessor;
 		}
-
 	}
+	return TRUE;
 }

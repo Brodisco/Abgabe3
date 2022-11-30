@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#pragma once
 #include "myboolean.h"
 #include "element.h"
 
