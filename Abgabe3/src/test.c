@@ -21,7 +21,8 @@ void test_pushPrint(void)
 	List* list = listCreate();//eine leere Liste anlegend und initialisieren
 	listPrint(list);//print die Liste raus
 
-	for(int i = 9; i > 0; i--)//Knoten 1-10
+	for(int i = 1; i < 10; i++)
+	//for(int i = 9; i > 0; i--)//Knoten 1-10
 	{
 		printf("%d ", i);
 		listPush(list, i);//assigns the value to the head and goes to the

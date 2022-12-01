@@ -93,18 +93,10 @@ void listPrint(List* list)
 void listFillRandom(List* list, int seed, int anzahlWerte, int min, int max)
 {
 	srand(seed);
-	int randomNumber = 0;
-
-		for (int i = 0; i < anzahlWerte; i++)
-		{
-			do
-			{
-				randomNumber = rand() % max;
-			}
-			while(!(randomNumber >= min));
-
-			listPush(list, randomNumber);
-		}
+	for(int i = 0; i < anzahlWerte; i++)
+	{
+		listPush(list, rand()%(max - min + 1) +min);
+	}
 }
 
 //Aufgabe 2
