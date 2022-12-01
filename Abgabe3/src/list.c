@@ -199,23 +199,29 @@ boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex)
 {
 	Element* elementA = listGetElementAtIndex(list, aIndex);
 	Element* elementB = listGetElementAtIndex(list, bIndex);
-	Element* elementTemp;
+	int elementTemp;
 
-	if (aIndex == bIndex) //prüft ob beide Index gleich sind
+	if (aIndex > bIndex) //prüft ob beide Index gleich sind
 	{
-		return FALSE;
+		elementTemp = aIndex;
+		aIndex = bIndex;
+		bIndex = elementTemp;
 	}
 
-	if((elementA == NULL) || (elementB == NULL)) //prüft ob einer den Elementen nicht
+	if((elementA == NULL) || (elementB == NULL) || (aIndex == bIndex)) //prüft ob einer den Elementen nicht
 												//nicht in der List ist(Liste kürzer)
 	{
 		return FALSE;
 	}
 
-	elementTemp = elementA->pSuccessor;
-	elementA->pSuccessor = elementB->pSuccessor;//classic switcharoo von zeigern
-	elementB->pSuccessor = elementTemp;
+	Element* elementBackup;
 
+	//Tausche die Verlinkung zu den Elementen die nach den zu tauschende Elementen liegen
+	elementBackup = elementA->pSuccessor;
+	elementA->pSuccessor = elementB->pSuccessor;//classic switcharoo von zeigern
+	elementB->pSuccessor = elementBackup;
+
+	//Wenn der erste Index das erste Element der Liste ist, muss der Kopf der Liste neu gesetzt werden
 	if(aIndex == 0) //checks if Index at position 0 is/the head is
 	{
 		list->head = elementB;
@@ -226,7 +232,7 @@ boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex)
 		list->head = elementA;
 		listGetElementAtIndex(list, aIndex - 1)->pSuccessor = elementB;
 	}
-	else
+	else//if none of them are heads, then just switch them
 	{
 		listGetElementAtIndex(list, aIndex - 1)->pSuccessor = elementB;
 		listGetElementAtIndex(list, bIndex - 1)->pSuccessor = elementA;
@@ -246,23 +252,21 @@ boolean listSwapElements(List* list, unsigned int aIndex, unsigned int bIndex)
 boolean listDeleteElement(List* list, unsigned int value)
 {
 	Element* element = list->head;
-	Element* prevElement = NULL; //weiß ich nicht
-//	int index = 0;
+	Element* prevElement = NULL;
+	int index = listGetIndexOfElement(list, value);
 
 	if(element == NULL)
 	{
 		return FALSE;
 	}
 
-//	index = listGetIndexOfElement(list, value);
-//	prevElement = listGetElementAtIndex(list, index-1);
+	prevElement = listGetElementAtIndex(list, index-1);
 
 	while(element != NULL)
 	{
-//		if(index == 0)
 		if(element->value == value)
 		{
-			prevElement = element->pSuccessor;
+			prevElement->pSuccessor = element->pSuccessor;
 			free(element);
 			break;
 		}
